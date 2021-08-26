@@ -1,0 +1,428 @@
+{% extends "blank.html" %}
+
+
+
+<!-- page specific plugin styles -->
+{% block styles %}
+
+<!-- end ofpage specific plugin styles -->
+{% endblock %}
+
+
+<!-- -->
+{% block navigator%}
+<li>
+    <a href="#">Patient Notification</a>
+</li>
+{% endblock %}
+
+<!-- navbar code-->
+{% block navbar %}
+<ul class="nav nav-list">
+    <li class="">
+        <a href="{{('index')}}">
+            <i class="menu-icon fa fa-dashboard"></i>
+            <span class="menu-text"> Dashboard </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="active open">
+        <a href="{{('Patientnotification')}}">
+            <i class="menu-icon fa fa-user-md"></i>
+            <span class="menu-text">Patients Notifications</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('getdirections')}}">
+            <i class="menu-icon fa fa-compass"></i>
+            <span class="menu-text"> Get Direction </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="">
+            <i class="menu-icon fa fa-anchor"></i>
+            <span class="menu-text"> Distance Matrix </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('mapview')}}">
+            <i class="menu-icon fa fa-desktop"></i>
+            <span class="menu-text">Map View</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('test')}}">
+            <i class="menu-icon fa fa-hospital-o"></i>
+            <span class="menu-text"> Hospitals </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('patients')}}">
+            <i class="menu-icon fa fa-user-md"></i>
+            <span class="menu-text">Patients</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-user"></i>
+
+            <span class="menu-text">
+                    Manage Users
+                    <span class="badge badge-primary">2</span>
+            </span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+            <li class="">
+                <a href="{{('newpatient')}}">
+                    <i class="menu-icon fa fa-wheelchair"></i> Patients
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="{{('newadministrator')}}">
+                    <i class="menu-icon fa fa-cogs"></i> Administrators
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="{{('newresponseteam')}}">
+                    <i class="menu-icon fa fa-ambulance"></i> Response Team
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="">
+        <a href="{{('ViewIncidents')}}">
+            <i class="menu-icon fa fa-book"></i>
+            <span class="menu-text">History</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+</ul>
+<!-- end navbar code -->
+{% endblock %}
+
+<!-- page content code-->
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="tabbable">
+            <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+                <li class="active">
+                    <a data-toggle="tab" href="#inbox" data-target="inbox">
+                        <i class="blue ace-icon fa fa-inbox bigger-130"></i>
+                        <span class="bigger-110">Requests</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+            <div class="tab-content no-border no-padding">
+                <div id="inbox" class="tab-pane in active">
+                    <div class="message-container">
+                        <div id="id-message-list-navbar" class="message-navbar clearfix">
+                            <div class="message-bar">
+                                <div class="message-infobar" id="id-message-infobar">
+
+                                    <span class="grey bigger-110">Patient Requests</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="nav-search minimized">
+                                    <form class="form-search">
+                                        <span class="input-icon">
+                                            <input type="text" autocomplete="off" class="input-small nav-search-input" placeholder="Search inbox ..." />
+                                            <i class="ace-icon fa fa-search nav-search-icon"></i>
+                                        </span>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="id-message-item-navbar" class="hide message-navbar clearfix">
+                            <div class="message-bar">
+                            </div>
+
+                            <div>
+                                <div class="messagebar-item-left">
+                                    <a href="#" class="btn-back-message-list">
+                                        <i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i>
+                                        <b class="bigger-110 middle">Back</b>
+                                    </a>
+                                </div>
+
+                                <div class="messagebar-item-right">
+                                    <i class="ace-icon fa fa-clock-o bigger-110 orange"></i>
+                                    <span class="grey">Today, 7:15 pm</span>
+                                </div>
+                            </div>
+                        </div>
+                        {%for patient in patients%} {%for incident in incidents%} {%if patient.phone_numbers == incident.phone_number%}
+                        <div class="message-list-container">
+                            <div class="message-list" id="message-list">
+                                <div class="message-item message-unread">
+                                    <label class="inline">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl"></span>
+                                    </label>
+
+                                    <span class="sender" title="Munyaradzi Makuwerere">{{patient.name}} {{patient.surname}}</span>
+                                    <span class="time">{{incident.reported_on}}</span>
+
+                                    <span class="attachment">
+                                        <i class="ace-icon fa fa-paperclip"></i>
+                                    </span>
+
+                                    <span class="summary">
+                                        <span class="text">
+                                            <a href="#{{incident.id}}" data-toggle="collapse">Click to open this message</a>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {%endif%} {%endfor%} {%endfor%}
+                    </div>
+                </div>
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.tabbable -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div id="floating-panel">
+    <div id="right-panel"></div>
+</div>
+<!-- /. start of message-content -->
+{%for patient in patients%} {%for incident in incidents%} {%if patient.phone_numbers == incident.phone_number%}
+<div id="{{incident.id}}" class="collapse">
+    <br>
+    <div id="id-message-content">
+        <div class="message-header clearfix">
+            <div class="pull-left">
+                <span class="blue bigger-125"> Emergency alert from</span>
+
+                <div class="space-4"></div>
+
+                <i class="ace-icon fa fa-star orange2"></i> &nbsp;
+                <img class="middle" alt="John's Avatar" src="{{ url_for('static', filename='assets/images/uploads/' + patient.profile_picture)}}" width="32" /> &nbsp;
+                <a href="#" class="sender">{{patient.name}} {{patient.surname}}</a> &nbsp;
+                <i class="ace-icon fa fa-clock-o bigger-110 orange middle"></i>
+                <span class="time grey">{{incident.reported_on.strftime("%Y-%m-%d")}}, {{incident.reported_on.strftime("%H:%M")}} pm</span>
+            </div>
+
+            <div class="pull-right action-buttons">
+                <a href="#">
+                    <i class="ace-icon fa fa-reply green icon-only bigger-130"></i>
+                </a>
+
+                <a href="#">
+                    <i class="ace-icon fa fa-mail-forward blue icon-only bigger-130"></i>
+                </a>
+
+                <a href="#">
+                    <i class="ace-icon fa fa-trash-o red icon-only bigger-130"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="hr hr-double"></div>
+
+        <div class="message-body">
+
+            <p>
+                <span class="blue bolder bigger-110">Patient History :</span>
+            </p>
+            <p>
+                {{patient.patient_history}}
+            </p>
+        </div>
+
+        <div class="hr hr-double"></div>
+
+        <div class="message-attachment clearfix">
+            <div class="attachment-title">
+                <span class="blue bolder bigger-110">Attachments</span> &nbsp;
+                <span class="grey">(1 files audio, 4.5 KB)</span>
+
+                <div class="inline position-relative">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                    &nbsp;
+                    <i class="ace-icon fa fa-caret-down bigger-125 middle"></i>
+                </a>
+
+                    <ul class="dropdown-menu dropdown-lighter">
+                        <li>
+                            <a href="#">Download all as zip</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Display in slideshow</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            &nbsp;
+            <ul class="attachment-list pull-left list-unstyled">
+                <li>
+                    <a href="#" class="attached-file">
+                        <i class="ace-icon fa fa-film bigger-110"></i>
+                        <span class="attached-name">Patient Audio File</span>
+                    </a>
+
+                    <span class="action-buttons">
+                    <a href="{{incident.audio}}">
+                        <i class="ace-icon fa fa-download bigger-125 blue"></i>
+                    </a>
+                </span>
+                </li>
+
+                <li>
+                    <audio controls>
+                        <source src="https://firebasestorage.googleapis.com/v0/b/emergency-service-759de.appspot.com/o/voiceclips%2F275697612audiorecord.mp3?alt=media&token=0aa96c9d-923c-4435-b3da-64bd9412c0cf" type="audio/ogg">
+                      </audio>
+                </li>
+            </ul>
+        </div>
+
+        <div class="message-footer message-footer-style2 clearfix">
+            <div class="pull-left">
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-success btn-white btn-round" onclick="calcRoute()">
+                        <i class="ace-icon fa fa-check bigger-110 green"></i>
+                        Get directions({{incident.lattitude}},{{incident.longitude}})
+                    </button>
+                </div>
+            </div>
+            <div id="map">
+            </div>
+        </div>
+        <br/>
+        <div id="floating-panel">
+            <div id="right-panel"></div>
+        </div>
+    </div>
+</div>
+{%endif%} {%endfor%} {%endfor%}
+<!-- /. end of message-content -->
+
+<!-- /.row -->
+<!-- end of page content code-->
+{% endblock %}
+
+<!-- start of script code-->
+{% block javascript %}
+<<<<<<< HEAD
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjr3yQIuvCqJPfMRVwNh5SOWfI9uy35ww&callback=initMap" async defer></script>
+=======
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeObotK5Ch7wK7tPvcX8pffSWXpBz-V8&callback=initMap" async defer></script>
+>>>>>>> a0db0f1b4cac7998601b97a7544d393746066fe3
+
+<!-- inline scripts related to this page -->
+<script>
+    var map;
+    var myLatLng = {
+        lat: -17.30192,
+        lng: ,31.33056
+    };
+
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: myLatLng,
+        });
+        var centerMaker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            draggable: True,
+            title: "BINDURA UNIVERSITY OF SCIENCE EDUCATION"
+        });
+
+    }
+
+    function calcRoute() {
+        /*  if (navigator.geolocation) {
+        	 navigator.geolocation.getCurrentPosition(function(position) {
+        		 var pos = {
+        			 lat: position.coords.latitude,
+        			 lng: position.coords.longitude
+        		 };
+        	 }, function() {
+        		 handleLocationError(true, infoWindow, map.getCenter());
+        	 });
+         } else {
+        	 // Browser doesn't support Geolocation
+        	 handleLocationError(false, infoWindow, map.getCenter());
+         } */
+
+        var directionsService = new google.maps.
+        DirectionsService();
+
+        var directionsDisplay;
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('right-panel'));
+
+        var control = document.getElementById('floating-panel');
+        control.style.display = 'marker';
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(control);
+
+        var start = new google.maps.LatLng(-17.310495, 31.3230222);
+        var end = new google.maps.LatLng(-17.30192, 31.33056);
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: 'DRIVING'
+        };
+
+        directionsService.route(request, function(result, status) {
+            if (status == 'OK') {
+                directionsDisplay.setDirections(result);
+            } else {
+                alert("could not calculate directions. Try again, or buy a map!");
+            }
+        });
+
+
+    }
+</script>
+
+<!-- page javascripts end -->
+{% endblock %}

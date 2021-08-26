@@ -1,0 +1,423 @@
+{% extends "blank.html" %}
+
+
+
+<!-- page specific plugin styles -->
+{% block styles %}
+<!-- end ofpage specific plugin styles -->
+{% endblock %}
+
+
+<!-- -->
+{% block navigator%}
+<li>
+    <a href="#">Patient Registration</a>
+</li>
+{% endblock %}
+
+<!-- navbar code-->
+{% block navbar %}
+<ul class="nav nav-list">
+    <li class="">
+        <a href="{{('index')}}">
+            <i class="menu-icon fa fa-dashboard"></i>
+            <span class="menu-text"> Dashboard </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('Patientnotification')}}">
+            <i class="menu-icon fa fa-user-md"></i>
+            <span class="menu-text">Patients Notifications</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('getdirections')}}">
+            <i class="menu-icon fa fa-compass"></i>
+            <span class="menu-text"> Get Direction </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="">
+            <i class="menu-icon fa fa-anchor"></i>
+            <span class="menu-text"> Distance Matrix </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('mapview')}}">
+            <i class="menu-icon fa fa-desktop"></i>
+            <span class="menu-text">Map View</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('test')}}">
+            <i class="menu-icon fa fa-hospital-o"></i>
+            <span class="menu-text"> Hospitals </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('patients')}}">
+            <i class="menu-icon fa fa-user-md"></i>
+            <span class="menu-text">Patients</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="active open">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-user"></i>
+
+            <span class="menu-text">
+                    Manage Users
+                    <span class="badge badge-primary">2</span>
+            </span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+            <li class="active">
+                <a href="{{('newpatient')}}">
+                    <i class="menu-icon fa fa-wheelchair"></i> Patients
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="{{('newadministrator')}}">
+                    <i class="menu-icon fa fa-cogs"></i> Administrators
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="{{('newresponseteam')}}">
+                    <i class="menu-icon fa fa-ambulance"></i> Response Team
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="">
+        <a href="{{('ViewIncidents')}}">
+            <i class="menu-icon fa fa-book"></i>
+            <span class="menu-text">History</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+</ul>
+<!-- end navbar code -->
+{% endblock %}
+
+<!-- page content code-->
+{% block content %}
+<h3 class="header smaller lighter blue">Fill The Form below To Register a Patient</h3>
+
+<div class="widget-header widget-header-blue widget-header-flat">
+    <span class="block input-icon input-icon-right">
+        <h4 class="widget-title lighter">Basic Patient Info</h4>
+        <i class="blue ace-icon fa fa-info-circle"></i>
+    </span>
+
+</div>
+<br>
+<form style="width: 900px; padding-right: 12px;" class="widget-header widget-header-blue widget-header-flat" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <div class="row">
+            <br>
+            <div class="col-xs-4">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.name(placeholder ="Name", class="form-control")}}
+                <i class="ace-icon fa fa-user"></i>
+            </span>
+            </div>
+            <div class="col-xs-4">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.surname(placeholder ="Surname", class="form-control")}}
+                <i class="ace-icon fa fa-user"></i>
+            </span>
+            </div>
+            <div class="col-xs-4">
+                <span class="block input-icon input-icon-right">                
+                            {{ form.national_id(placeholder ="National ID", class="form-control")}}
+                    <i class="ace-icon fa fa-cc-amex"></i>
+                </span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <select class="form-control" {{form.gender()}}>
+                <option>Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            </div>
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.BirthDate(type="date", class="form-control")}}
+                <i class="ace-icon fa fa-calendar"></i>
+            </span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.phone_number(placeholder ="Patient's Phone Number", class="form-control")}}
+                <i class="ace-icon fa fa-phone"></i>
+            </span>
+            </div>
+
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.email(placeholder ="Email", type="email", class="form-control")}}
+                <i class="ace-icon fa fa fa-envelope"></i>
+            </span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-5">
+                <select class="form-control" {{form.marital()}}>
+                <option>Select Marital Status</option>
+                <option>Single</option>
+                <option>Married</option>
+            </select>
+            </div>
+
+            <div class="col-xs-2">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.age(placeholder ="Age",  class="form-control")}}
+                    <i class="ace-icon fa fa-hashtag"></i>
+                </span>
+            </div>
+
+            <div class="col-xs-5">
+                <select class="form-control" {{form.race()}}>
+                    <option>Select Race</option>
+                    <option>Black</option>
+                    <option>White</option>
+                    <option>Asian</option>
+                    <option>Coloured</option>
+                </select>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-xs-5">
+                <span class="block input-icon input-icon-right"> 
+                        {{form.image( type="file", class="form-control", placeholder="passport sized picture")}}               
+                    <i class="ace-icon fa fa-file-image-o"></i>
+                </span>
+            </div>
+            <div class="col-xs-7">
+                <textarea class="form-control" {{form.patient_history(placeholder="Insert the Patient History" )}}</textarea>
+            </div>
+        </div>
+        <br>
+        <div class="hr hr2 hr-double"></div>
+        <br>
+
+        <div class="widget-header widget-header-blue widget-header-flat">
+            <span class="block input-icon input-icon-right">
+            <h4 class="widget-title lighter">Basic Info About Next Of Keen </h4>
+            <i class="blue ace-icon fa fa-info-circle"></i>
+        </span>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.nextOfKeen(placeholder ="Next of Keen's Name", class="form-control")}}
+                    <i class="ace-icon fa fa-user"></i>
+                </span>
+            </div>
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.NOKsurname(placeholder ="Next of Keen's Surname", class="form-control")}}
+                    <i class="ace-icon fa fa-user"></i>
+                </span>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.relationship(placeholder ="Relationship", class="form-control")}}
+                <i class="ace-icon fa fa-chain-broken"></i>
+            </span>
+            </div>
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                            {{ form.phone_number2(placeholder ="Next of Keen's Number", class="form-control")}}
+                    <i class="ace-icon fa fa-mobile"></i>
+                </span>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="widget-header widget-header-blue widget-header-flat">
+            <span class="block input-icon input-icon-right">
+            <h4 class="widget-title lighter">Location Details </h4>
+            <i class="blue ace-icon fa fa-info-circle"></i>
+        </span>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.street(placeholder ="Street Address", class="form-control")}}
+                    <i class="ace-icon fa fa-home"></i>
+                </span>
+            </div>
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.surburb(placeholder ="Suburb", class="form-control")}}
+                    <i class="ace-icon fa fa-home"></i>
+                </span>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.city(placeholder ="City", class="form-control")}}
+                <i class="ace-icon fa fa-home"></i>
+            </span>
+            </div>
+        </div>
+        <br>
+        <div class="hr hr2 hr-dotted hr-double"></div>
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.password(placeholder ="Password", type="password", class="form-control")}}
+                <i class="ace-icon fa fa-lock"></i>
+            </span>
+            </div>
+
+            <div class="col-xs-6">
+                <span class="block input-icon input-icon-right">                
+                        {{ form.password2(placeholder ="Confirm Password", type="password", class="form-control")}}
+                <i class="ace-icon fa fa fa-retweet"></i>
+            </span>
+            </div>
+        </div>
+        <br>
+
+        <div class="clearfix">
+            <button type="submit" class="width-35 btn btn-sm btn-primary btn-blue btn-round">
+                <span class="bigger-110">Register Patient</span>
+                <i class="ace-icon fa fa-check bigger-110 white"></i>
+    </button>
+        </div>
+        <br>
+    </fieldset>
+</form>
+<!-- end of page content code-->
+{% endblock %}
+
+<!-- page specific plugin scripts -->
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+        //Initialize tooltips
+        $('.nav-tabs > li a[title]').tooltip();
+
+        //Wizard
+        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+
+            var $target = $(e.target);
+
+            if ($target.parent().hasClass('disabled')) {
+                return false;
+            }
+        });
+
+        $(".next-step").click(function(e) {
+
+            var $active = $('.wizard .nav-tabs li.active');
+            $active.next().removeClass('disabled');
+            nextTab($active);
+
+        });
+        $(".prev-step").click(function(e) {
+
+            var $active = $('.wizard .nav-tabs li.active');
+            prevTab($active);
+
+        });
+    });
+
+    function nextTab(elem) {
+        $(elem).next().find('a[data-toggle="tab"]').click();
+    }
+
+    function prevTab(elem) {
+        $(elem).prev().find('a[data-toggle="tab"]').click();
+    }
+
+
+    //according menu
+
+    $(document).ready(function() {
+        //Add Inactive Class To All Accordion Headers
+        $('.accordion-header').toggleClass('inactive-header');
+
+        //Set The Accordion Content Width
+        var contentwidth = $('.accordion-header').width();
+        $('.accordion-content').css({});
+
+        //Open The First Accordion Section When Page Loads
+        $('.accordion-header').first().toggleClass('active-header').toggleClass('inactive-header');
+        $('.accordion-content').first().slideDown().toggleClass('open-content');
+
+        // The Accordion Effect
+        $('.accordion-header').click(function() {
+            if ($(this).is('.inactive-header')) {
+                $('.active-header').toggleClass('active-header').toggleClass('inactive-header').next().slideToggle().toggleClass('open-content');
+                $(this).toggleClass('active-header').toggleClass('inactive-header');
+                $(this).next().slideToggle().toggleClass('open-content');
+            } else {
+                $(this).toggleClass('active-header').toggleClass('inactive-header');
+                $(this).next().slideToggle().toggleClass('open-content');
+            }
+        });
+
+        return false;
+    });
+</script>
+<!-- page javascripts end -->
+{% endblock %}

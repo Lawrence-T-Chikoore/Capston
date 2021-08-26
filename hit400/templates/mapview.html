@@ -1,0 +1,199 @@
+{% extends "blank.html" %}
+
+
+
+<!-- page specific plugin styles -->
+{% block styles %}
+
+<!-- end ofpage specific plugin styles -->
+{% endblock %}
+
+<!-- -->
+{% block navigator%}
+<li>
+    <a href="#">Map View</a>
+</li>
+
+{% endblock %}
+
+<!-- navbar code-->
+{% block navbar %}
+<ul class="nav nav-list">
+    <li class="">
+        <a href="{{('index')}}">
+            <i class="menu-icon fa fa-dashboard"></i>
+            <span class="menu-text"> Dashboard </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('Patientnotification')}}">
+            <i class="menu-icon fa fa-user-md"></i>
+            <span class="menu-text">Patients Notifications</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('getdirections')}}">
+            <i class="menu-icon fa fa-compass"></i>
+            <span class="menu-text"> Get Direction </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="index.html">
+            <i class="menu-icon fa fa-anchor"></i>
+            <span class="menu-text"> Distance Matrix </span>
+        </a>
+        <b class="arrow"></b>
+    </li>
+
+    <li class="active open">
+        <a href="{{('mapview')}}">
+            <i class="menu-icon fa fa-desktop"></i>
+            <span class="menu-text">Map View</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('test')}}">
+            <i class="menu-icon fa fa-hospital-o"></i>
+            <span class="menu-text"> Hospitals </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="{{('patients')}}">
+            <i class="menu-icon fa fa-user-md"></i>
+            <span class="menu-text">Patients</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-user"></i>
+
+            <span class="menu-text">
+                    Manage Users
+                    <span class="badge badge-primary">2</span>
+            </span>
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+
+        <b class="arrow"></b>
+
+        <ul class="submenu">
+            <li class="">
+                <a href="{{('newpatient')}}">
+                    <i class="menu-icon fa fa-wheelchair"></i> Patients
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="{{('newadministrator')}}">
+                    <i class="menu-icon fa fa-cogs"></i> Administrators
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+            <li class="">
+                <a href="{{('newresponseteam')}}">
+                    <i class="menu-icon fa fa-ambulance"></i> Response Team
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+        </ul>
+    </li>
+
+    <li class="">
+        <a href="{{('ViewIncidents')}}">
+            <i class="menu-icon fa fa-book"></i>
+            <span class="menu-text">History</span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+</ul>
+<!-- end navbar code -->
+{% endblock %}
+
+<!-- page content code-->
+{% block content %}
+<div id="map">
+</div>
+
+<button id="btnTerrain">Terrain</button>
+<button id="btnRoadmap">Road Map</button>
+<button id="Satellite">Satellite</button>
+<button id="btnHybrid">Hybrid</button>
+
+<!-- end of page content code-->
+{% endblock %}
+
+
+<!-- page specific plugin scripts -->
+{% block javascript %}
+<<<<<<< HEAD
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjr3yQIuvCqJPfMRVwNh5SOWfI9uy35ww&callback=initMap" async defer></script>
+=======
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdeObotK5Ch7wK7tPvcX8pffSWXpBz-V8&callback=initMap" async defer></script>
+>>>>>>> a0db0f1b4cac7998601b97a7544d393746066fe3
+
+<!-- page specific plugin scripts -->
+<script>
+    var map;
+    var myLatLng = {
+        lat: -17.310495,
+        lng: 31.3230222
+    };
+    
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: myLatLng,
+        });
+        var centerMaker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: "BINDURA UNIVERSITY OF SCIENCE EDUCATION"
+        });
+        addButtons(map);
+    }
+
+    function addButtons(map) {
+        document.getElementById('btnTerrain').addEventListener('click', function() {
+            map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+        });
+
+        document.getElementById('btnRoadmap').addEventListener('click', function() {
+            map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+        });
+
+        document.getElementById('Satellite').addEventListener('click', function() {
+            map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        });
+
+        document.getElementById('btnHybrid').addEventListener('click', function() {
+            map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+        });
+    }
+</script>
+<!-- page javascripts end -->
+{% endblock %}
